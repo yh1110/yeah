@@ -1,5 +1,5 @@
 import { Tab, TabPanel, Tabs } from "@yamada-ui/react";
-import { PostItem } from "../molecules/PostItem";
+import { PostItem } from "../../molecules/PostItem";
 import { useAppSelector } from "@/hooks/reduxHooks";
 
 export const TimeLine = () => {

@@ -25,7 +25,7 @@ export const Announce = () => {
         />
       </div>
       <div className="bg-gradient-to-r from-secondary-100 to-secondary-200 text-text-100 p-4 rounded-lg">
-        <h3 className="text-xl font-bold mb-2">Ver. 3.53</h3>
+        <h3 className="text-xl font-bold mb-2">Ver. 0.1</h3>
         <p>アップデート情報</p>
       </div>
     </div>
