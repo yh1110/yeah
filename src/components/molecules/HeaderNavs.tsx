@@ -16,7 +16,7 @@ export const HeaderNavs = () => {
         <MessageCircle className="h-5 w-5" />
       </NavigationBase>
 
-      <NavigationBase path="/" text="通知">
+      <NavigationBase path="/activities" text="通知">
         <Bell className="h-5 w-5" />
       </NavigationBase>
 

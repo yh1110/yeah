@@ -8,7 +8,7 @@ export const UserProfile: FunctionComponent = () => {
       <div className=" w-full box-border ">
         <div className=" w-full box-border bg-primary-300 shadow rounded-lg overflow-hidden">
           {/* ヘッダー画像 */}
-          <div className=" w-full box-border h-40 bg-gradient-to-r from-blue-400 to-purple-500"></div>
+          <div className=" w-full box-border h-40 bg-gradient-to-r from-secondary-100 to-secondary-200"></div>
           {/* ユーザー情報 */}
           <div className=" w-full box-border px-4 py-5 sm:p-6">
             <div className=" w-full box-border flex flex-col items-center">
