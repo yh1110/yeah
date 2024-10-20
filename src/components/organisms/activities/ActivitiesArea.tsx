@@ -1,14 +1,39 @@
-import { NavigationTabs, tabsType } from "@/components/molecules/NavigationTabs";
-import { useAppSelector } from "@/hooks/reduxHooks";
+import { NavigationTabs } from "@/components/molecules/NavigationTabs";
+import { activityTabType } from "@/types/NavigationTabProps";
 import { FunctionComponent } from "react";
 
 export const ActivitiesArea: FunctionComponent = () => {
-  const postItems = useAppSelector((state) => state.postItems.post);
-  const tabs: tabsType = {
+  const tabs: activityTabType = {
     type: "activities",
     tabinfo: [
-      { name: "重要", content: postItems },
-      { name: "お知らせ", content: postItems },
+      {
+        name: "重要",
+        content: [
+          {
+            isActivies: true,
+            userImageUrl: "string",
+            userName: "string",
+            userAction: "string",
+            replyText: "string",
+            postText: "string",
+            actionDate: "string",
+          },
+        ],
+      },
+      {
+        name: "お知らせ",
+        content: [
+          {
+            isActivies: false,
+            userImageUrl: "string",
+            userName: "string",
+            userAction: "string",
+            replyText: "string",
+            postText: "string",
+            actionDate: "string",
+          },
+        ],
+      },
     ],
   };
   return (

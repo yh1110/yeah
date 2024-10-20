@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+export type post = { userImageUrl: string; userName: string; postText: string };
+type postItem = {
+  post: post[];
+};
 
-const initialState = {
+const initialState: postItem = {
   post: [
     {
       userImageUrl: "https://placeholder.pics/svg/256/ADADAD-ADADAD/ADADAD-ADADAD",

@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = {
+export type item = {
+  href: "/";
+  name: "ホーム";
+  isCurrentPage: true;
+};
+type breadcrumbItem = {
+  item: item[];
+};
+const initialState: breadcrumbItem = {
   item: [
     {
       href: "/",
