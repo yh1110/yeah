@@ -8,7 +8,7 @@ type PostItemProps = {
 };
 
 export const PostItem: React.FC<PostItemProps> = ({ userImageUrl, userName, postText }) => {
-  return (
+  return postText ? (
     <div className="p-6 border-b border-border-300 ">
       <div className="flex items-start space-x-3">
         <img src={userImageUrl} alt="User avatar" className="w-10 h-10 rounded-full" />
@@ -24,5 +24,7 @@ export const PostItem: React.FC<PostItemProps> = ({ userImageUrl, userName, post
         </div>
       </div>
     </div>
+  ) : (
+    <div></div>
   );
 };

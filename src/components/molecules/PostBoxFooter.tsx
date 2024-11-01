@@ -3,6 +3,7 @@ import { PostOptionBase } from "../atoms/PostOption";
 
 export const PostBoxFooter = () => {
   return (
+    // #TODO
     <div className="flex items-center justify-between">
       <div className="flex space-x-2">
         <PostOptionBase>

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
-import { PostBox } from "../organisms/home/PostBox";
-import { TimeLine } from "../organisms/home/TimeLine";
-import { HomeTemplate } from "../templates/HomeTemplate";
+import { PostBox } from "../../organisms/main/home/PostBox";
+import { TimeLine } from "../../organisms/main/home/TimeLine";
+import { HomeTemplate } from "../../templates/HomeTemplate";
 import { useEffect, useMemo } from "react";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { change } from "@/slice/breadcrumbSlice";

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
-import { TimeLine } from "../organisms/profile/TimeLine";
-import { UserProfile } from "../organisms/profile/UserProfile";
-import { HomeTemplate } from "../templates/HomeTemplate";
+import { TimeLine } from "../../organisms/main/profile/TimeLine";
+import { UserProfile } from "../../organisms/main/profile/UserProfile";
+import { HomeTemplate } from "../../templates/HomeTemplate";
 import { useEffect, useMemo } from "react";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { change } from "@/slice/breadcrumbSlice";

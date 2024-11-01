@@ -1,5 +1,5 @@
-import { HeaderNavs } from "../../molecules/HeaderNavs";
-import { SerchBox } from "../../molecules/SerchBox";
+import { HeaderNavs } from "../../../molecules/HeaderNavs";
+import { SerchBox } from "../../../molecules/SerchBox";
 
 export const HomeHeader = () => {
   return (

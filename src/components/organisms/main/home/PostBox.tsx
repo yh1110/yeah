@@ -1,5 +1,5 @@
 import { FormControl, Textarea } from "@yamada-ui/react";
-import { PostBoxFooter } from "../../molecules/PostBoxFooter";
+import { PostBoxFooter } from "../../../molecules/PostBoxFooter";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { post } from "@/slice/postItemsSlice";
 import { useAppDispatch } from "@/hooks/reduxHooks";
@@ -20,20 +20,21 @@ export const PostBox = () => {
 
   const dispatch = useAppDispatch();
 
-  const postContent: SubmitHandler<PostType> = async (data: PostType) => {
+  //投稿ボタンで発火
+  const handlePostContent: SubmitHandler<PostType> = async (data: PostType) => {
     const postItems = {
       userImageUrl: "https://placeholder.pics/svg/256/ADADAD-ADADAD/ADADAD-ADADAD",
       userName: "neon",
       postText: data.postArea,
     };
-    dispatch(post(postItems));
+    dispatch(post(postItems)); //グローバルステートに値を追加
     console.log(data);
   };
 
   return (
     <form
       className="bg-primary-300 rounded-lg shadow-md p-6 mb-8"
-      onSubmit={handleSubmit(postContent)}
+      onSubmit={handleSubmit(handlePostContent)}
     >
       <div className="px-3">
         <FormControl isInvalid={!!errors.postArea}>
@@ -75,14 +76,16 @@ export const PostBox = () => {
               "Aa",
               "Aa",
             ].map((text, index) => (
-              <button
+              // #TODO
+              <a
                 key={index}
-                className={`px-3 py-1 rounded-full text-sm ${
-                  index === 0 ? "border border-blue-500 text-blue-500" : "border text-text-300"
+                //#TODO 後々修正(左詰め)
+                className={`px-3 py-1  text-sm cursor-pointer ${
+                  index === 0 ? " border-blue-500 text-blue-500" : " text-text-300"
                 }`}
               >
                 {text}
-              </button>
+              </a>
             ))}
           </div>
         </div>

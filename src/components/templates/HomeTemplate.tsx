@@ -1,9 +1,9 @@
 import { Box, VStack } from "@yamada-ui/react";
-import { HomeHeader } from "../organisms/home/HomeHeader";
+import { HomeHeader } from "../organisms/main/home/HomeHeader";
 import React from "react";
 import { useMemo } from "react";
-import { Announce } from "../organisms/home/Announce";
-import { GroupList } from "../organisms/home/GroupList";
+import { Announce } from "../organisms/main/home/Announce";
+import { GroupList } from "../organisms/main/home/GroupList";
 import { Breadcrumb, BreadcrumbGenerateItem } from "@yamada-ui/react";
 import { useAppSelector } from "@/hooks/reduxHooks";
 

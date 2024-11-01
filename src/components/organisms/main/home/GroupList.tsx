@@ -1,4 +1,4 @@
-import { GroupListItem } from "../../molecules/GroupListItem";
+import { GroupListItem } from "../../../molecules/GroupListItem";
 
 const groupItems = [
   {

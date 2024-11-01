@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useMemo } from "react";
-import { HomeTemplate } from "../templates/HomeTemplate";
+import { HomeTemplate } from "../../templates/HomeTemplate";
 import { useLocation } from "react-router-dom";
-import { ActivitiesArea } from "../organisms/activities/ActivitiesArea";
+import { ActivitiesArea } from "../../organisms/main/activities/ActivitiesArea";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { change } from "@/slice/breadcrumbSlice";
 
