@@ -25,6 +25,7 @@ export const AuthFormArea: FunctionComponent<AuthFormAreaProps> = ({ isSignin })
         </div>
       </CardHeader>
       <CardBody>
+        {/* フォーム */}
         <AuthForm isSignin={isSignin} />
       </CardBody>
       {isSignin ? (

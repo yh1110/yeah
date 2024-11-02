@@ -4,6 +4,9 @@ import { FcGoogle } from "react-icons/fc";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AuthFormInput } from "../atoms/AuthFormInput";
 import { FunctionComponent } from "react";
+import { useAppDispatch } from "@/hooks/reduxHooks";
+import { getCurrentUser } from "@/slice/userSlice";
+import { setIsLoading } from "@/slice/loadingSlice";
 
 export type authFormType = {
   username?: string;
@@ -14,7 +17,10 @@ export type authFormType = {
 type AuthFormProps = {
   isSignin: boolean;
 };
+
 export const AuthForm: FunctionComponent<AuthFormProps> = ({ isSignin }) => {
+  const dispatch = useAppDispatch();
+
   const {
     handleSubmit,
     control,
@@ -23,7 +29,12 @@ export const AuthForm: FunctionComponent<AuthFormProps> = ({ isSignin }) => {
 
   //ボタンでイベント発火
   const handleSubmitForm: SubmitHandler<authFormType> = async (data: authFormType) => {
-    //#TODO API叩く
+    //#TODO API叩く ユーザーネームがフォームに含まれているかで条件分岐
+    dispatch(setIsLoading(true));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const user = "null"; //fetch
+    dispatch(getCurrentUser(user));
+    dispatch(setIsLoading(false));
     console.log(data);
   };
 
