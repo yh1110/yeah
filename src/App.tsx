@@ -7,11 +7,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Activities } from "./components/pages/main/Activities";
 import { Signin } from "./components/pages/auth/Signin";
 import { Signup } from "./components/pages/auth/Signup";
+import theme from "./theme";
 
 function App() {
   return (
     <Provider store={store}>
-      <UIProvider>
+      <UIProvider theme={theme}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />

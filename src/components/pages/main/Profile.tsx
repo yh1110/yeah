@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { TimeLine } from "../../organisms/main/profile/TimeLine";
 import { UserProfile } from "../../organisms/main/profile/UserProfile";
 import { HomeTemplate } from "../../templates/HomeTemplate";
 import { useEffect, useMemo } from "react";
@@ -24,7 +23,6 @@ export const Profile = () => {
   return (
     <HomeTemplate>
       <UserProfile />
-      <TimeLine />
     </HomeTemplate>
   );
 };
