@@ -1,9 +1,14 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { getCurrentUser } from "@/slice/userSlice";
 import { Box, Button, Center, Flex, Modal, ModalBody, ModalHeader, Text } from "@yamada-ui/react";
+import { FunctionComponent } from "react";
 import { Navigate } from "react-router-dom";
 
-export const ProfielMenuPanel = ({ isOpen, onClose }) => {
+type ProfielMenuPanelProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
+export const ProfielMenuPanel: FunctionComponent<ProfielMenuPanelProps> = ({ isOpen, onClose }) => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.user.user);
   const signout = async () => {
