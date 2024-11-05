@@ -1,5 +1,5 @@
-import { NavigationTabs } from "@/components/molecules/NavigationTabs";
-import { activityTabType } from "@/types/NavigationTabProps";
+import { BoxNavs } from "@/components/molecules/BoxNavs";
+import { activityTabType } from "@/types/BoxNavsProps";
 import { FunctionComponent } from "react";
 
 export const ActivitiesArea: FunctionComponent = () => {
@@ -10,6 +10,7 @@ export const ActivitiesArea: FunctionComponent = () => {
         name: "重要",
         content: [
           {
+            id: 0,
             isActivies: true,
             userImageUrl: "string",
             userName: "string",
@@ -24,6 +25,7 @@ export const ActivitiesArea: FunctionComponent = () => {
         name: "お知らせ",
         content: [
           {
+            id: 0,
             isActivies: false,
             userImageUrl: "string",
             userName: "string",
@@ -39,7 +41,7 @@ export const ActivitiesArea: FunctionComponent = () => {
   return (
     <div className="bg-primary-300 rounded-lg shadow-md min-w-[600px]">
       <div className=" border-b border-border-300 ">
-        <NavigationTabs tabs={tabs} />
+        <BoxNavs tabs={tabs} />
       </div>
     </div>
   );

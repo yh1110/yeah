@@ -2,14 +2,14 @@ import { post } from "@/slice/postItemsSlice";
 import { FunctionComponent } from "react";
 
 //Home Timeline
-declare type homePostType = post;
+export declare type homePostType = post;
 declare interface homeTabInfo {
   name: string;
   content: homePostType[];
 }
-declare interface homeTabsType {
+export declare interface homeTabsType {
   type: string;
-  tabinfo: homeTabinfo[];
+  tabinfo: homeTabInfo[];
 }
 declare interface homeTabProps {
   tabs: homeTabsType;
@@ -17,7 +17,8 @@ declare interface homeTabProps {
 
 //Activity ActivityArea
 //reduxに記述した際の型情報(仮実装)
-declare type activityItemType = {
+export declare type activityItemType = {
+  id: number;
   isActivies: boolean;
   userImageUrl: string;
   userName: string;
@@ -30,7 +31,7 @@ declare interface activityTabInfo {
   name: string;
   content: activityItemType[];
 }
-declare interface activityTabType {
+export declare interface activityTabType {
   type: string;
   tabinfo: activityTabInfo[];
 }
@@ -38,6 +39,6 @@ declare interface activityTabProps {
   tabs: activityTabType;
 }
 
-//NavigationTabのタイプ
+//BoxNavsPropsのタイプ
 
-export declare type NavigationTabProps = FunctionComponent<homeTabProps | activityTabProps>;
+export declare type BoxNavsProps = FunctionComponent<homeTabProps | activityTabProps>;

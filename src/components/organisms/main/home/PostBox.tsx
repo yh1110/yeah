@@ -10,6 +10,7 @@ type PostType = {
 //widthで要素幅を調整
 //w-fullで子要素の要素幅を合わせる
 //box-borderで子要素の要素幅(paddingも含む)を合わせる
+let num = 0;
 
 export const PostBox = () => {
   const {
@@ -22,14 +23,18 @@ export const PostBox = () => {
 
   //投稿ボタンで発火
   const handlePostContent: SubmitHandler<PostType> = async (data: PostType) => {
+    num++;
     const postItems = {
+      id: num,
       userImageUrl: "https://placeholder.pics/svg/256/ADADAD-ADADAD/ADADAD-ADADAD",
       userName: "neon",
       postText: data.postArea,
+      isActivateHeart: false,
     };
     dispatch(post(postItems)); //グローバルステートに値を追加
-    console.log(data);
+    console.log(postItems);
   };
+  // console.log(num);
 
   return (
     <form

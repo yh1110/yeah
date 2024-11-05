@@ -11,6 +11,7 @@ export const TimeLine: FunctionComponent = () => {
         <AlbumPreview />
         {postItems.map((item) => (
           <PostItem
+            id={item.id}
             userImageUrl={item.userImageUrl}
             userName={item.userName}
             postText={item.postText}

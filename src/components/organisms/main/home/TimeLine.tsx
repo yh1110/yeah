@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/hooks/reduxHooks";
-import { NavigationTabs } from "@/components/molecules/NavigationTabs";
-import { homeTabsType } from "@/types/NavigationTabProps";
+import { BoxNavs } from "@/components/molecules/BoxNavs";
+import { homeTabsType } from "@/types/BoxNavsProps";
 
 export const TimeLine = () => {
   const postItems = useAppSelector((state) => state.postItems.post);
@@ -14,7 +14,7 @@ export const TimeLine = () => {
   return (
     <div className="bg-primary-300 rounded-lg shadow-md">
       <div className=" border-b border-border-300 ">
-        <NavigationTabs tabs={tabs} />
+        <BoxNavs tabs={tabs} />
       </div>
     </div>
   );
