@@ -1,8 +1,17 @@
-import { Menu, MenuButton, MenuItem, MenuList, useDisclosure } from "@yamada-ui/react";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  useDisclosure,
+} from "@yamada-ui/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ProfielMenuPanel } from "../pages/main/modal/ProfielMenuPanel";
-import { LogOut } from "lucide-react";
+import { ProfielMenuPanel } from "../pages/desktop/modal/ProfielMenuPanel";
+import { Bell, GalleryVerticalEnd, LogOut, MessageCircle, Users } from "lucide-react";
 
 type NavigationBaseProps = {
   path: string;
@@ -24,6 +33,7 @@ export const NavigationBase: React.FC<NavigationBaseProps> = ({ path, text, chil
 type UserMenuNavProps = {
   path: string;
 };
+
 export const UserMenuNav: React.FC<UserMenuNavProps> = ({ path }) => {
   const navigate = useNavigate();
   const transitionProfilePage = () => {
@@ -73,5 +83,72 @@ export const UserMenuNav: React.FC<UserMenuNavProps> = ({ path }) => {
 
       <ProfielMenuPanel isOpen={isOpen} onClose={onClose} />
     </div>
+  );
+};
+
+export const TabletDrawerNav = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const signout = useDisclosure();
+  return (
+    <>
+      <img
+        src="./neko.jpg"
+        alt="User avatar"
+        className="w-9 h-9 object-cover rounded-full "
+        onClick={() => {
+          onOpen();
+        }}
+      />
+
+      <Drawer
+        isOpen={isOpen}
+        onClose={onClose}
+        placement="left"
+        size="xs"
+        style={{ backgroundColor: "#171717", color: "#A6A6A6" }}
+      >
+        <DrawerHeader marginBottom="md">
+          <Link to="/profile">
+            <div className="flex items-center" onClick={onClose}>
+              <img
+                src="./neko.jpg"
+                alt="User avatar"
+                className="w-12 h-12 object-cover rounded-full   mr-4"
+              />
+              <div>
+                <p className="text-text-200">neon</p>
+                <p className="text-text-300 text-xs">プロフィールを見る</p>
+              </div>
+            </div>
+          </Link>
+        </DrawerHeader>
+
+        <DrawerBody>
+          <div onClick={onClose} className="flex flex-col space-y-12">
+            <NavigationBase path="/" text="タイムライン">
+              <GalleryVerticalEnd className="h-5 w-5 mr-2" />
+            </NavigationBase>
+
+            <NavigationBase path="/" text="サークル">
+              <Users className="h-5 w-5 mr-2" />
+            </NavigationBase>
+
+            <NavigationBase path="/" text="チャット">
+              <MessageCircle className="h-5 w-5 mr-2" />
+            </NavigationBase>
+
+            <NavigationBase path="/activities" text="通知">
+              <Bell className="h-5 w-5 mr-2" />
+            </NavigationBase>
+
+            <div className="text-rose-800 flex items-center " onClick={signout.onOpen}>
+              <LogOut className="h-5 w-5 mr-2" />
+              <span>ログアウト</span>
+            </div>
+          </div>
+        </DrawerBody>
+      </Drawer>
+      <ProfielMenuPanel isOpen={signout.isOpen} onClose={signout.onClose} />
+    </>
   );
 };

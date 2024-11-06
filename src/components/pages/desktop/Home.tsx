@@ -1,13 +1,17 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { PostBox } from "../../organisms/main/home/PostBox";
 import { TimeLine } from "../../organisms/main/home/TimeLine";
-import { HomeTemplate } from "../../templates/HomeTemplate";
+import { HomeTemplate } from "../../templates/desktop/HomeTemplate";
 import { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { change } from "@/slice/breadcrumbSlice";
 import { LoadingPage } from "../loading/LoadingPage";
+import { useMediaQuery } from "@yamada-ui/react";
+import { TabletHomeTemplate } from "@/components/templates/tablet/TabletHomeTemplate";
+import { TabletTimeLine } from "@/components/organisms/main/home/tablet/TabletTimeLine";
 
 export const Home = () => {
+  const [isTablet] = useMediaQuery(["(max-width: 1200px)"]);
   const currentUser = useAppSelector((state) => state.user.user);
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const breadcrumbItems = useMemo(
@@ -30,10 +34,18 @@ export const Home = () => {
 
   if (currentUser === null) return <Navigate replace to="/signin" />;
 
-  return (
-    <HomeTemplate>
-      <PostBox />
-      <TimeLine />
-    </HomeTemplate>
-  );
+  if (isTablet) {
+    return (
+      <TabletHomeTemplate>
+        <TabletTimeLine />
+      </TabletHomeTemplate>
+    );
+  } else {
+    return (
+      <HomeTemplate>
+        <PostBox />
+        <TimeLine />
+      </HomeTemplate>
+    );
+  }
 };

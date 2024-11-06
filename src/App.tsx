@@ -1,10 +1,10 @@
 import { Provider } from "react-redux";
-import { Home } from "./components/pages/main/Home";
+import { Home } from "./components/pages/desktop/Home";
 import { UIProvider } from "@yamada-ui/react";
 import { store } from "./store/store";
-import { Profile } from "./components/pages/main/Profile";
+import { Profile } from "./components/pages/desktop/Profile";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Activities } from "./components/pages/main/Activities";
+import { Activities } from "./components/pages/desktop/Activities";
 import { Signin } from "./components/pages/auth/Signin";
 import { Signup } from "./components/pages/auth/Signup";
 import theme from "./theme";

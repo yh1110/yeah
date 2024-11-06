@@ -39,7 +39,7 @@ export const ActivitiesArea: FunctionComponent = () => {
     ],
   };
   return (
-    <div className="bg-primary-300 rounded-lg shadow-md min-w-[600px]">
+    <div className="bg-primary-300 rounded-lg shadow-md ">
       <div className=" border-b border-border-300 ">
         <BoxNavs tabs={tabs} />
       </div>

@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useMemo } from "react";
-import { HomeTemplate } from "../../templates/HomeTemplate";
+import { HomeTemplate } from "../../templates/desktop/HomeTemplate";
 import { useLocation } from "react-router-dom";
 import { ActivitiesArea } from "../../organisms/main/activities/ActivitiesArea";
 import { useAppDispatch } from "@/hooks/reduxHooks";

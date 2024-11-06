@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { UserProfile } from "../../organisms/main/profile/UserProfile";
-import { HomeTemplate } from "../../templates/HomeTemplate";
+import { HomeTemplate } from "../../templates/desktop/HomeTemplate";
 import { useEffect, useMemo } from "react";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { change } from "@/slice/breadcrumbSlice";

@@ -12,7 +12,7 @@ export const TimeLine = () => {
     ],
   };
   return (
-    <div className="bg-primary-300 rounded-lg shadow-md">
+    <div className="bg-primary-300 rounded-lg shadow-md mt-8">
       <div className=" border-b border-border-300 ">
         <BoxNavs tabs={tabs} />
       </div>

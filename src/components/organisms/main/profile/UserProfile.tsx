@@ -6,7 +6,7 @@ import { ProfileInfoItem } from "@/components/atoms/ProfileInfoItem";
 export const UserProfile: FunctionComponent = () => {
   const [displayComponents, setDisplayComponents] = useState("");
   return (
-    <>
+    <div className="w-full">
       <div className="  w-full box-border bg-primary-300 rounded-lg shadow-md mb-8">
         <div className=" w-full box-border ">
           <div className=" w-full box-border bg-primary-300 shadow rounded-lg overflow-hidden">
@@ -73,6 +73,6 @@ export const UserProfile: FunctionComponent = () => {
             break;
         }
       })()}
-    </>
+    </div>
   );
 };
