@@ -7,6 +7,7 @@ import { FunctionComponent } from "react";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { getCurrentUser } from "@/slice/userSlice";
 import { setIsLoading } from "@/slice/loadingSlice";
+import { authRepository } from "@/api/auth/auth";
 
 export type authFormType = {
   username?: string;
@@ -28,14 +29,36 @@ export const AuthForm: FunctionComponent<AuthFormProps> = ({ isSignin }) => {
   } = useForm<authFormType>();
 
   //ボタンでイベント発火
-  const handleSubmitForm: SubmitHandler<authFormType> = async (data: authFormType) => {
+  const handleSubmitForm: SubmitHandler<authFormType> = async (data) => {
     //#TODO API叩く ユーザーネームがフォームに含まれているかで条件分岐
     dispatch(setIsLoading(true));
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    const user = "null"; //fetch
-    dispatch(getCurrentUser(user));
+    try {
+      if (data) {
+        if (isSignin) {
+          const user = await authRepository.signin(data);
+          console.log(user);
+          if (user) dispatch(getCurrentUser(user));
+        } else {
+          const user = await authRepository.signup(data);
+          console.log(user);
+          if (user) dispatch(getCurrentUser(user));
+        }
+      } else {
+        console.log("データが入力されていない");
+      }
+    } catch (error: unknown) {
+      // Errorインスタンスか確認
+      if (error instanceof Error) {
+        //ログインに失敗
+        console.error(error.message);
+        console.log("サインイン、サインアップエラー");
+      } else {
+        console.error("An unknown error occurred"); // 不明なエラーの場合
+        console.log("不明なエラー");
+      }
+    }
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
     dispatch(setIsLoading(false));
-    console.log(data);
   };
 
   return (

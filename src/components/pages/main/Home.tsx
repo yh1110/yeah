@@ -27,7 +27,7 @@ export const Home = () => {
 
   if (isLoading) return <LoadingPage />;
 
-  if (currentUser === null) return <Navigate replace to="/signin" />;
+  if (currentUser == null) return <Navigate replace to="/signin" />;
 
   return (
     <HomeTemplate>
