@@ -10,7 +10,7 @@ import {
 } from "@yamada-ui/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ProfielMenuPanel } from "../pages/desktop/modal/ProfielMenuPanel";
+import { ProfielMenuPanel } from "../pages/modal/ProfielMenuPanel";
 import { Bell, GalleryVerticalEnd, LogOut, MessageCircle, Users } from "lucide-react";
 
 type NavigationBaseProps = {

@@ -11,7 +11,7 @@ import { TabletHomeTemplate } from "@/components/templates/tablet/TabletHomeTemp
 import { TabletTimeLine } from "@/components/organisms/main/home/tablet/TabletTimeLine";
 
 export const Home = () => {
-  const [isTablet] = useMediaQuery(["(max-width: 1200px)"]);
+  const [isDesktop, isTablet] = useMediaQuery(["(min-width: 1200px)", "(min-width: 580px)"]);
   const currentUser = useAppSelector((state) => state.user.user);
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const breadcrumbItems = useMemo(
@@ -34,18 +34,27 @@ export const Home = () => {
 
   if (currentUser === null) return <Navigate replace to="/signin" />;
 
-  if (isTablet) {
+  if (isDesktop) {
+    // デスクトップ
+    return (
+      <HomeTemplate>
+        <PostBox />
+        <TimeLine />
+      </HomeTemplate>
+    );
+  } else if (isTablet) {
+    //タブレット
     return (
       <TabletHomeTemplate>
         <TabletTimeLine />
       </TabletHomeTemplate>
     );
   } else {
+    //モバイル
     return (
-      <HomeTemplate>
-        <PostBox />
-        <TimeLine />
-      </HomeTemplate>
+      <TabletHomeTemplate>
+        <TabletTimeLine />
+      </TabletHomeTemplate>
     );
   }
 };

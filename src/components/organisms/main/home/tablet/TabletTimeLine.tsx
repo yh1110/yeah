@@ -43,7 +43,11 @@ export const TabletTimeLine = () => {
             borderBottom: "1px solid #3f3f3f",
             justifyContent: "center",
           }}
-          paddingBottom="md"
+          marginY="sm"
+          paddingY="sm"
+          // paddingBottom="sm"
+          textColor="#F3F3F3"
+          fontSize="sm"
         >
           投稿
         </ModalHeader>
