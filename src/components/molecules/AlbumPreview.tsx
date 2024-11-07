@@ -2,8 +2,8 @@ import { FunctionComponent } from "react";
 
 export const AlbumPreview: FunctionComponent = () => {
   return (
-    <div className=" w-full box-border grid grid-cols-8 gap-4  border-b border-border-300 p-6">
-      {[...Array(7)].map((_, i) => (
+    <div className=" w-full box-border grid dt:grid-cols-7 mb:grid-cols-6  gap-4  border-b border-border-300 tb:p-6 p-3">
+      {[...Array(6)].map((_, i) => (
         <div
           key={i}
           className=" w-full box-border aspect-square bg-gray-200 rounded-lg overflow-hidden"

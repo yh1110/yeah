@@ -38,7 +38,7 @@ export const PostBox = () => {
 
   return (
     <form
-      className="bg-primary-300 rounded-lg shadow-md p-6"
+      className="bg-primary-300 rounded-lg shadow-md p-6 hidden dt:block"
       onSubmit={handleSubmit(handlePostContent)}
     >
       <div className="px-3">

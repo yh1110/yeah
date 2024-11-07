@@ -3,12 +3,12 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { post } from "@/slice/postItemsSlice";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { FunctionComponent } from "react";
-import { TabletPostBoxFooter } from "@/components/molecules/tablet/TabletPostBoxFooter";
+import { PostBoxFooter } from "@/components/molecules/PostBoxFooter";
 
 type PostType = {
   postArea: string;
 };
-type TabletPostBoxProps = {
+type PostBoxModalProps = {
   onClose: () => void;
 };
 //widthで要素幅を調整
@@ -16,7 +16,7 @@ type TabletPostBoxProps = {
 //box-borderで子要素の要素幅(paddingも含む)を合わせる
 let num = 0;
 
-export const TabletPostBox: FunctionComponent<TabletPostBoxProps> = ({ onClose }) => {
+export const PostBoxModal: FunctionComponent<PostBoxModalProps> = ({ onClose }) => {
   const {
     handleSubmit,
     control,
@@ -104,7 +104,7 @@ export const TabletPostBox: FunctionComponent<TabletPostBoxProps> = ({ onClose }
         </ModalBody>
 
         <div className="px-4 py-4">
-          <TabletPostBoxFooter onClose={onClose} />
+          <PostBoxFooter onClose={onClose} />
         </div>
       </div>
     </form>

@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 
 export const SerchBox = () => {
   return (
-    <div className="relative flex-grow max-w-xl mx-4">
+    <div className="relative flex-grow max-w-xl mx-4 dt:block hidden">
       <input
         type="text"
         placeholder="検索"

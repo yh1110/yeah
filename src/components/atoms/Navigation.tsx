@@ -86,7 +86,7 @@ export const UserMenuNav: React.FC<UserMenuNavProps> = ({ path }) => {
   );
 };
 
-export const TabletDrawerNav = () => {
+export const DrawerNav = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const signout = useDisclosure();
   return (

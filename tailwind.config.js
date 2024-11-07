@@ -3,6 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        mb: "0px", // mdを変更
+        tb: "580px", // lgを変更
+        dt: "1200px", // xlを変更
+      },
       colors: {
         primary: {
           100: "#2f2f2f",

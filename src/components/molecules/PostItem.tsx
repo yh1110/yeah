@@ -20,10 +20,10 @@ export const PostItem: React.FC<PostItemProps> = memo(
     );
     const value = targetPost?.isActivateHeart;
 
-    const post = useAppSelector((state) => state.postItems.post);
-    console.log(post);
+    // const post = useAppSelector((state) => state.postItems.post);
+    // console.log(post);
 
-    console.log(isActivateHeart);
+    // console.log(isActivateHeart);
     return postText ? (
       <div className="p-6 border-b border-border-300 " key={id}>
         <div className="flex items-start space-x-3">
