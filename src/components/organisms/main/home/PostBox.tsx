@@ -2,7 +2,7 @@ import { FormControl, Textarea } from "@yamada-ui/react";
 import { PostBoxFooter } from "../../../molecules/PostBoxFooter";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { post } from "@/slice/postItemsSlice";
-import { useAppDispatch } from "@/hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 
 type PostType = {
   postArea: string;
@@ -19,6 +19,7 @@ export const PostBox = () => {
     formState: { errors },
   } = useForm<PostType>();
 
+  const userName = useAppSelector((state) => state.user.user?.userName);
   const dispatch = useAppDispatch();
 
   //投稿ボタンで発火
@@ -27,7 +28,7 @@ export const PostBox = () => {
     const postItems = {
       id: num,
       userImageUrl: "https://placeholder.pics/svg/256/ADADAD-ADADAD/ADADAD-ADADAD",
-      userName: "neon",
+      userName,
       postText: data.postArea,
       isActivateHeart: false,
     };

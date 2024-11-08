@@ -6,6 +6,9 @@ import { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { change } from "@/slice/breadcrumbSlice";
 import { LoadingPage } from "../loading/LoadingPage";
+import { authRepository } from "@/api/auth/auth";
+import { getCurrentUser } from "@/slice/userSlice";
+import { setIsLoading } from "@/slice/loadingSlice";
 
 export const Home = () => {
   const currentUser = useAppSelector((state) => state.user.user);
@@ -22,12 +25,22 @@ export const Home = () => {
   );
 
   useEffect(() => {
+    dispatch(setIsLoading(true));
+    const setSession = async () => {
+      const user = await authRepository.getCurrentUser();
+      dispatch(getCurrentUser(user));
+    };
+    setSession();
+    dispatch(setIsLoading(false));
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(change(breadcrumbItems));
   }, [location.pathname, dispatch, breadcrumbItems]);
 
   if (isLoading) return <LoadingPage />;
 
-  if (currentUser == null) return <Navigate replace to="/signin" />;
+  if (!currentUser) return <Navigate replace to="/signin" />;
 
   return (
     <HomeTemplate>

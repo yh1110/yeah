@@ -1,7 +1,7 @@
 import { FormControl, ModalBody, Textarea } from "@yamada-ui/react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { post } from "@/slice/postItemsSlice";
-import { useAppDispatch } from "@/hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { FunctionComponent } from "react";
 import { PostBoxFooter } from "@/components/molecules/PostBoxFooter";
 
@@ -24,6 +24,7 @@ export const PostBoxModal: FunctionComponent<PostBoxModalProps> = ({ onClose }) 
   } = useForm<PostType>();
 
   const dispatch = useAppDispatch();
+  const userName = useAppSelector((state) => state.user.user?.userName);
 
   //投稿ボタンで発火
   const handlePostContent: SubmitHandler<PostType> = async (data: PostType) => {
@@ -31,7 +32,7 @@ export const PostBoxModal: FunctionComponent<PostBoxModalProps> = ({ onClose }) 
     const postItems = {
       id: num,
       userImageUrl: "https://placeholder.pics/svg/256/ADADAD-ADADAD/ADADAD-ADADAD",
-      userName: "neon",
+      userName,
       postText: data.postArea,
       isActivateHeart: false,
     };

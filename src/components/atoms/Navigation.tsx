@@ -12,6 +12,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ProfielMenuPanel } from "../pages/modal/ProfielMenuPanel";
 import { Bell, GalleryVerticalEnd, LogOut, MessageCircle, Users } from "lucide-react";
+import { useAppSelector } from "@/hooks/reduxHooks";
 
 type NavigationBaseProps = {
   path: string;
@@ -36,6 +37,7 @@ type UserMenuNavProps = {
 
 export const UserMenuNav: React.FC<UserMenuNavProps> = ({ path }) => {
   const navigate = useNavigate();
+  const userName = useAppSelector((state) => state.user.user?.userName);
   const transitionProfilePage = () => {
     console.log("transition");
     // return <Navigate replace to="/home/profile" />;
@@ -53,7 +55,7 @@ export const UserMenuNav: React.FC<UserMenuNavProps> = ({ path }) => {
               alt="User avatar"
               className="w-9 h-9 object-cover rounded-full  mx-2"
             />
-            <span className="text-text-100">neon</span>
+            <span className="text-text-100">{userName}</span>
           </div>
         </MenuButton>
         <MenuList>
@@ -66,7 +68,7 @@ export const UserMenuNav: React.FC<UserMenuNavProps> = ({ path }) => {
                 className="w-12 h-12 object-cover rounded-full  mx-2 mr-4"
               />
               <div>
-                <p className="text-text-200">neon</p>
+                <p className="text-text-200">{userName}</p>
                 <p className="text-text-300 text-xs">プロフィールを見る</p>
               </div>
             </div>
@@ -87,6 +89,7 @@ export const UserMenuNav: React.FC<UserMenuNavProps> = ({ path }) => {
 };
 
 export const DrawerNav = () => {
+  const userName = useAppSelector((state) => state.user.user?.userName);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const signout = useDisclosure();
   return (
@@ -116,7 +119,7 @@ export const DrawerNav = () => {
                 className="w-12 h-12 object-cover rounded-full   mr-4"
               />
               <div>
-                <p className="text-text-200">neon</p>
+                <p className="text-text-200">{userName}</p>
                 <p className="text-text-300 text-xs">プロフィールを見る</p>
               </div>
             </div>

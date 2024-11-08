@@ -11,8 +11,9 @@ export const Signin = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const currentUser = useAppSelector((state) => state.user.user);
+
   if (isLoading) return <LoadingPage />;
-  if (currentUser !== null) return <Navigate replace to="/" />; //トップページへ遷移
+  if (currentUser) return <Navigate replace to="/" />; //トップページへ遷移
 
   const handleSubmitForm = async (data: authFormType) => {
     dispatch(setIsLoading(true));

@@ -13,6 +13,7 @@ export const BoxNavs: BoxNavsProps = ({ tabs }) => {
           </Tab>
         ))}
 
+        {/* 投稿 */}
         {tabs.tabinfo.map((info) => (
           <TabPanel padding="0">
             {info.content.map((item) => {
@@ -40,7 +41,7 @@ export const BoxNavs: BoxNavsProps = ({ tabs }) => {
           </Tab>
         ))}
 
-        {/* コンポーネント分割 */}
+        {/* 通知欄 */}
         {tabs.tabinfo.map((info) => (
           <TabPanel padding="0" position="relative">
             {info.content.map((item) => {

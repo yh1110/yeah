@@ -1,8 +1,14 @@
 import { authFormType } from "@/components/molecules/AuthForm";
 import { supabase } from "../client";
+import { User } from "@supabase/supabase-js";
+
+export interface authUser {
+  userData: User | null;
+  userName: string;
+}
 
 export const authRepository = {
-  async signup(userData: authFormType) {
+  async signup(userData: authFormType): Promise<authUser | null> {
     const { username, email, password } = userData;
 
     const { data, error } = await supabase.auth.signUp({
@@ -16,10 +22,10 @@ export const authRepository = {
     }
     console.log("signup");
 
-    return { ...data.user, userName: data.user?.user_metadata?.name };
+    return { userData: data.user, userName: data.user?.user_metadata?.name };
   },
 
-  async signin(userData: authFormType) {
+  async signin(userData: authFormType): Promise<authUser | null> {
     const { email, password } = userData;
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -33,16 +39,18 @@ export const authRepository = {
       throw new Error(error.message);
     }
 
-    return { ...data.user, userName: data.user.user_metadata?.name };
+    console.log(data.user);
+
+    return { userData: data.user, userName: data.user.user_metadata?.name };
   },
 
-  async getCurrentUser() {
+  async getCurrentUser(): Promise<authUser | null> {
     const { data, error } = await supabase.auth.getSession();
     if (error != null) throw new Error(error.message);
-    if (data.session == null) return;
+    if (!data.session) return null;
 
     return {
-      ...data.session.user,
+      userData: data.session.user,
       userName: data.session.user.user_metadata.name,
     };
   },

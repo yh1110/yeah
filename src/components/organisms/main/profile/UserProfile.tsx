@@ -2,8 +2,10 @@ import { UserIcon } from "@/components/atoms/UserIcon";
 import { FunctionComponent, useState } from "react";
 import { TimeLine } from "./TimeLine";
 import { ProfileInfoItem } from "@/components/atoms/ProfileInfoItem";
+import { useAppSelector } from "@/hooks/reduxHooks";
 
 export const UserProfile: FunctionComponent = () => {
+  const userName = useAppSelector((state) => state.user.user?.userName);
   const [displayComponents, setDisplayComponents] = useState("");
   return (
     <div className="w-full">
@@ -21,7 +23,7 @@ export const UserProfile: FunctionComponent = () => {
                   alt="neon"
                 />
                 {/* ユーザーネーム */}
-                <h2 className="  mt-4 text-2xl font-bold text-text-200">neon</h2>
+                <h2 className="  mt-4 text-2xl font-bold text-text-200">{userName}</h2>
                 {/* プロフィール編集 */}
                 <div className=" my-6">
                   <button className="text-secondary-300 text-sm">プロフィール編集</button>

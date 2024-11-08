@@ -1,3 +1,4 @@
+import { authRepository } from "@/api/auth/auth";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { getCurrentUser } from "@/slice/userSlice";
 import { Box, Button, Center, Flex, Modal, ModalBody, ModalHeader, Text } from "@yamada-ui/react";
@@ -12,7 +13,7 @@ export const ProfielMenuPanel: FunctionComponent<ProfielMenuPanelProps> = ({ isO
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.user.user);
   const signout = async () => {
-    // await authRepository.signout();
+    authRepository.signout();
     dispatch(getCurrentUser(null));
   };
   if (currentUser == null) return <Navigate replace to="/signin" />;
