@@ -1,12 +1,17 @@
-import { AuthForm } from "@/components/molecules/AuthForm";
+import { AuthForm, authFormType } from "@/components/molecules/AuthForm";
 import { Card, CardBody, CardFooter, CardHeader } from "@yamada-ui/react";
 import { FunctionComponent } from "react";
+import { SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 type AuthFormAreaProps = {
   isSignin: boolean;
+  handleSubmitForm: SubmitHandler<authFormType>;
 };
-export const AuthFormArea: FunctionComponent<AuthFormAreaProps> = ({ isSignin }) => {
+export const AuthFormArea: FunctionComponent<AuthFormAreaProps> = ({
+  isSignin,
+  handleSubmitForm,
+}) => {
   return (
     <Card
       className=" max-w-md "
@@ -26,7 +31,7 @@ export const AuthFormArea: FunctionComponent<AuthFormAreaProps> = ({ isSignin })
       </CardHeader>
       <CardBody>
         {/* フォーム */}
-        <AuthForm isSignin={isSignin} />
+        <AuthForm isSignin={isSignin} handleSubmitForm={handleSubmitForm} />
       </CardBody>
       {isSignin ? (
         <CardFooter className="flex flex-col space-y-4 mt-2">
