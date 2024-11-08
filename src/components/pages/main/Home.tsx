@@ -55,9 +55,9 @@ export const Home = () => {
 
   if (isLoading) return <LoadingPage />;
 
-  if (!isEmailVerified) return <EmailVerifiedModal />;
-
   if (!currentUser) return <Navigate replace to="/signin" />;
+
+  if (!isEmailVerified) return <EmailVerifiedModal />;
 
   return (
     <HomeTemplate>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isEmailVerified: false,
+  isEmailVerified: true,
 };
 
 const isEmailVerifiedSlice = createSlice({
