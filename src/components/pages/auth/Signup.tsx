@@ -6,13 +6,13 @@ import { setIsLoading } from "@/slice/loadingSlice";
 import { authRepository } from "@/api/auth/auth";
 import { getCurrentUser } from "@/slice/userSlice";
 import { authFormType } from "@/components/molecules/AuthForm";
+import { setIsEmailVerified } from "@/slice/isEmailVerified";
 
 export const Signup = () => {
+  // const [isEmailVerified, setIsEmailVerified] = useState(true);
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const currentUser = useAppSelector((state) => state.user.user);
-  if (isLoading) return <LoadingPage />; //ローディング画面
-  if (currentUser !== null) return <Navigate replace to="/" />; //トップページへ遷移
 
   const handleSubmitForm = async (data: authFormType) => {
     dispatch(setIsLoading(true));
@@ -20,7 +20,13 @@ export const Signup = () => {
       if (data) {
         const user = await authRepository.signup(data);
         console.log(user);
-        if (user) dispatch(getCurrentUser(user));
+        if (user) {
+          //正常終了時
+          dispatch(getCurrentUser(user));
+          dispatch(setIsEmailVerified(false)); //認証画面表示フラグ
+        } else {
+          console.log("ユーザー情報無し");
+        }
       } else {
         console.log("データが入力されていない");
       }
@@ -38,6 +44,11 @@ export const Signup = () => {
     // await new Promise((resolve) => setTimeout(resolve, 1000));
     dispatch(setIsLoading(false));
   };
+
+  if (isLoading) return <LoadingPage />; //ローディング画面
+  // if (!isEmailVerified) return <EmailVerifiedModal />;
+  if (currentUser) return <Navigate replace to="/" />; //トップページへ遷移
+
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
       <AuthFormArea isSignin={false} handleSubmitForm={handleSubmitForm} />

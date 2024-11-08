@@ -21,6 +21,7 @@ export const authRepository = {
       throw new Error(error.message);
     }
     console.log("signup");
+    console.log(data);
 
     return { userData: data.user, userName: data.user?.user_metadata?.name };
   },
@@ -35,7 +36,6 @@ export const authRepository = {
 
     if (error) {
       console.error("signinError:", error.message);
-
       throw new Error(error.message);
     }
 
@@ -44,9 +44,24 @@ export const authRepository = {
     return { userData: data.user, userName: data.user.user_metadata?.name };
   },
 
+  async isEmailVerified(): Promise<boolean> {
+    const { data, error } = await supabase.auth.getUser();
+    console.log("isEmailVerified");
+    console.log(data);
+
+    if (error) throw new Error(error.message);
+    if (data.user && data.user.email_confirmed_at) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
   async getCurrentUser(): Promise<authUser | null> {
     const { data, error } = await supabase.auth.getSession();
-    if (error != null) throw new Error(error.message);
+    console.log(data);
+
+    if (error) throw new Error(error.message);
     if (!data.session) return null;
 
     return {

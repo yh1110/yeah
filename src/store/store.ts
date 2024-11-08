@@ -2,6 +2,7 @@ import postItems from "@/slice/postItemsSlice";
 import breadcrumbItems from "@/slice/breadcrumbSlice";
 import user from "@/slice/userSlice";
 import isLoading from "@/slice/loadingSlice";
+import isEmailVerified from "@/slice/isEmailVerified";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     breadcrumbItems,
     user,
     isLoading,
+    isEmailVerified,
   },
 });
 

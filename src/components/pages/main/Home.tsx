@@ -9,10 +9,12 @@ import { LoadingPage } from "../loading/LoadingPage";
 import { authRepository } from "@/api/auth/auth";
 import { getCurrentUser } from "@/slice/userSlice";
 import { setIsLoading } from "@/slice/loadingSlice";
+import { EmailVerifiedModal } from "../modal/EmailVerifiedModal";
 
 export const Home = () => {
   const currentUser = useAppSelector((state) => state.user.user);
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
+  const isEmailVerified = useAppSelector((state) => state.isEmailVerified.isEmailVerified);
   const location = useLocation();
   const dispatch = useAppDispatch();
 
@@ -24,14 +26,27 @@ export const Home = () => {
     []
   );
 
+  // useEffect(() => {
+  //   const checkEmailVerrified = async () => {
+  //     const isEmailVerified = await authRepository.isEmailVerified();
+
+  //     console.log(isEmailVerified);
+
+  //     setIsEmailVerified(isEmailVerified);
+  //   };
+  //   checkEmailVerrified();
+  // }, [isEmailVerified]);
+
   useEffect(() => {
     dispatch(setIsLoading(true));
     const setSession = async () => {
       const user = await authRepository.getCurrentUser();
       dispatch(getCurrentUser(user));
+      dispatch(setIsLoading(false));
     };
+    console.log("session");
+
     setSession();
-    dispatch(setIsLoading(false));
   }, [dispatch]);
 
   useEffect(() => {
@@ -39,6 +54,8 @@ export const Home = () => {
   }, [location.pathname, dispatch, breadcrumbItems]);
 
   if (isLoading) return <LoadingPage />;
+
+  if (!isEmailVerified) return <EmailVerifiedModal />;
 
   if (!currentUser) return <Navigate replace to="/signin" />;
 
