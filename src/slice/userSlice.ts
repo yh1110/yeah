@@ -16,7 +16,6 @@ const userSlice = createSlice({
     //現在のuser情報のグローバルステート
     getCurrentUser: (state, action) => {
       state.user = action.payload;
-      console.log(state.user);
     },
   },
 });

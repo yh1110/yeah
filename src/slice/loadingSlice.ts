@@ -10,9 +10,7 @@ const isLoadingSlice = createSlice({
   reducers: {
     //現在のuser情報のグローバルステート
     setIsLoading: (state, action) => {
-      console.log(action.payload);
       state.isLoading = action.payload;
-      console.log(state.isLoading);
     },
   },
 });

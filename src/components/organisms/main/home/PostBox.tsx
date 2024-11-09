@@ -33,9 +33,7 @@ export const PostBox = () => {
       isActivateHeart: false,
     };
     dispatch(post(postItems)); //グローバルステートに値を追加
-    console.log(postItems);
   };
-  // console.log(num);
 
   return (
     <form

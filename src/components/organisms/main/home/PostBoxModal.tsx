@@ -39,7 +39,6 @@ export const PostBoxModal: FunctionComponent<PostBoxModalProps> = ({ onClose }) 
     dispatch(post(postItems)); //グローバルステートに値を追加
     console.log(postItems);
   };
-  // console.log(num);
 
   return (
     <form

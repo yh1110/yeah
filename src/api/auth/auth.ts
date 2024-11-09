@@ -1,6 +1,7 @@
 import { authFormType } from "@/components/molecules/AuthForm";
 import { supabase } from "../client";
 import { User } from "@supabase/supabase-js";
+import { type EmailOtpType } from "@supabase/supabase-js";
 
 export interface authUser {
   userData: User | null;
@@ -20,8 +21,6 @@ export const authRepository = {
       console.error("signupError:", error.message);
       throw new Error(error.message);
     }
-    console.log("signup");
-    console.log(data);
 
     return { userData: data.user, userName: data.user?.user_metadata?.name };
   },
@@ -32,34 +31,40 @@ export const authRepository = {
       email,
       password,
     });
-    console.log("signin");
 
     if (error) {
       console.error("signinError:", error.message);
       throw new Error(error.message);
     }
 
-    console.log(data.user);
-
     return { userData: data.user, userName: data.user.user_metadata?.name };
   },
 
-  async isEmailVerified(): Promise<boolean> {
-    const { data, error } = await supabase.auth.getUser();
-    console.log("isEmailVerified");
-    console.log(data);
+  //メールが認証されたかの判別 #TODO
+  async isEmailConfirmed(email: string) {
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: "http://localhost:5173/",
+      },
+    });
 
     if (error) throw new Error(error.message);
-    if (data.user && data.user.email_confirmed_at) {
-      return true;
-    } else {
-      return false;
-    }
+    return data;
+  },
+
+  //トークンで認証 #TODO
+  async verifyOtp(type: EmailOtpType, token_hash: string) {
+    const { error } = await supabase.auth.verifyOtp({
+      type,
+      token_hash,
+    });
+
+    if (error) throw new Error(error.message);
   },
 
   async getCurrentUser(): Promise<authUser | null> {
     const { data, error } = await supabase.auth.getSession();
-    console.log(data);
 
     if (error) throw new Error(error.message);
     if (!data.session) return null;

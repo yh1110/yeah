@@ -20,7 +20,6 @@ export const Signin = () => {
     try {
       if (data) {
         const user = await authRepository.signin(data);
-        console.log(user);
         if (user) dispatch(getCurrentUser(user));
       } else {
         console.log("データが入力されていない");

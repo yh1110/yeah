@@ -35,7 +35,6 @@ const postItemsSlice = createSlice({
       state.post.unshift(action.payload);
     },
     handleHeart: (state, action) => {
-      console.log(action.payload);
       const { key, value } = action.payload;
       const targetPost = state.post.find((post) => post.id === key);
       if (targetPost) {
