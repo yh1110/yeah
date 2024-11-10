@@ -1,7 +1,6 @@
 import { authFormType } from "@/components/molecules/AuthForm";
 import { supabase } from "../client";
 import { User } from "@supabase/supabase-js";
-import { type EmailOtpType } from "@supabase/supabase-js";
 
 export interface authUser {
   userData: User | null;
@@ -9,6 +8,7 @@ export interface authUser {
 }
 
 export const authRepository = {
+  //サインアップ(新規登録)
   async signup(userData: authFormType): Promise<authUser | null> {
     const { username, email, password } = userData;
 
@@ -25,6 +25,7 @@ export const authRepository = {
     return { userData: data.user, userName: data.user?.user_metadata?.name };
   },
 
+  //サインイン
   async signin(userData: authFormType): Promise<authUser | null> {
     const { email, password } = userData;
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -41,28 +42,32 @@ export const authRepository = {
   },
 
   //メールが認証されたかの判別 #TODO
-  async isEmailConfirmed(email: string) {
-    const { data, error } = await supabase.auth.signInWithOtp({
+  // async isEmailConfirmed(email: string) {
+  //   const { data, error } = await supabase.auth.signInWithOtp({
+  //     email,
+  //     options: {
+  //       emailRedirectTo: "http://localhost:5173/",
+  //     },
+  //   });
+
+  //   if (error) throw new Error(error.message);
+  //   return data;
+  // },
+
+  //otpトークンで認証
+  async verifyOtp(email: string, token: string): Promise<authUser | null> {
+    const { data, error } = await supabase.auth.verifyOtp({
       email,
-      options: {
-        emailRedirectTo: "http://localhost:5173/",
-      },
+      token,
+      type: "email",
     });
 
     if (error) throw new Error(error.message);
-    return data;
+
+    return { userData: data.user, userName: data.user?.user_metadata.name };
   },
 
-  //トークンで認証 #TODO
-  async verifyOtp(type: EmailOtpType, token_hash: string) {
-    const { error } = await supabase.auth.verifyOtp({
-      type,
-      token_hash,
-    });
-
-    if (error) throw new Error(error.message);
-  },
-
+  //現在のユーザーを取得(セッション取得)
   async getCurrentUser(): Promise<authUser | null> {
     const { data, error } = await supabase.auth.getSession();
 
@@ -75,6 +80,7 @@ export const authRepository = {
     };
   },
 
+  //サインアウト
   async signout() {
     const { error } = await supabase.auth.signOut();
     if (error != null) throw new Error(error.message);

@@ -32,6 +32,16 @@ export default {
           100: "#3ECF8E",
         },
       },
+      keyframes: {
+        "fade-out": {
+          "0%": { opacity: 1 },
+          "40%": { opacity: 1 },
+          "100%": { opacity: 0 },
+        },
+      },
+      animation: {
+        "fade-out": "fade-out 2.5s ease-out forwards",
+      },
     },
   },
   plugins: [],

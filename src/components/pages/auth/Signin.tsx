@@ -34,9 +34,10 @@ export const Signin = () => {
         console.error("An unknown error occurred"); // 不明なエラーの場合
         console.log("不明なエラー");
       }
+    } finally {
+      dispatch(setIsLoading(false));
     }
     // await new Promise((resolve) => setTimeout(resolve, 1000));
-    dispatch(setIsLoading(false));
   };
 
   return (

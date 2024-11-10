@@ -8,7 +8,8 @@ import { EmailVerifiedModal } from "../modal/EmailVerifiedModal";
 import { useState } from "react";
 
 export const Signup = () => {
-  const [isEmailVerified, setIsEmailVerified] = useState(true);
+  const [isDisplayEmailVerified, setIsDisplayEmailVerified] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
 
@@ -21,7 +22,8 @@ export const Signup = () => {
           //正常終了時(ユーザー認証はまだ完了していない)
           // dispatch(getCurrentUser(user));
           // localStorage.setItem("user_email", user.userData?.email ?? "");
-          setIsEmailVerified(false); //認証画面表示フラグ
+          setUserEmail(data.email);
+          setIsDisplayEmailVerified(true); //認証画面表示フラグ
         } else {
           console.log("ユーザー情報無し");
         }
@@ -37,11 +39,12 @@ export const Signup = () => {
         // 不明なエラーの場合
         console.log("不明なエラー");
       }
+    } finally {
+      dispatch(setIsLoading(false));
     }
-    dispatch(setIsLoading(false));
   };
 
-  if (!isEmailVerified) return <EmailVerifiedModal />;
+  if (isDisplayEmailVerified) return <EmailVerifiedModal email={userEmail} />;
   if (isLoading) return <LoadingPage />; //ローディング画面
 
   return (
