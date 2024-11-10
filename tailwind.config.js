@@ -40,7 +40,7 @@ export default {
         },
       },
       animation: {
-        "fade-out": "fade-out 2.5s ease-out forwards",
+        "fade-out": "fade-out 4s ease-out forwards",
       },
     },
   },
