@@ -4,16 +4,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Activities } from "./components/pages/main/Activities";
 import { Signin } from "./components/pages/auth/Signin";
 import { Signup } from "./components/pages/auth/Signup";
-import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
+import { useAppDispatch } from "./hooks/reduxHooks";
 import { useEffect } from "react";
 import { setIsLoading } from "./slice/loadingSlice";
 // import { authRepository } from "./api/auth/auth";
 import { getCurrentUser } from "./slice/userSlice";
-import { LoadingPage } from "./components/pages/loading/LoadingPage";
 
 export const Router = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector((state) => state.isLoading.isLoading);
 
   //ユーザー情報取得
   useEffect(() => {
@@ -45,7 +43,7 @@ export const Router = () => {
     setSession();
   }, [dispatch]);
 
-  if (isLoading) return <LoadingPage />;
+  console.log("Router");
 
   return (
     <BrowserRouter>

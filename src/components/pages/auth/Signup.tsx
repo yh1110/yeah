@@ -13,15 +13,22 @@ export const Signup = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
 
+  if (isDisplayEmailVerified) return <EmailVerifiedModal email={userEmail} />;
+  if (isLoading) return <LoadingPage />; //ローディング画面
+
   const handleSubmitForm = async (data: authFormType) => {
     dispatch(setIsLoading(true));
     try {
+      console.log("try");
       if (data) {
         const user = await authRepository.signup(data);
+        console.log(user);
         if (user) {
           //正常終了時(トークン送信)
           setUserEmail(data.email);
           setIsDisplayEmailVerified(true); //認証画面表示フラグ
+          // localStorage.setItem("user", JSON.stringify(user));
+          console.log(userEmail);
         } else {
           console.log("ユーザー情報無し");
         }
@@ -42,8 +49,7 @@ export const Signup = () => {
     }
   };
 
-  if (isDisplayEmailVerified) return <EmailVerifiedModal email={userEmail} />;
-  if (isLoading) return <LoadingPage />; //ローディング画面
+  console.log("SignUp", isDisplayEmailVerified);
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">

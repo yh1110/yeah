@@ -24,7 +24,7 @@ export const EmailVerifiedModal: FunctionComponent<EmailVerifiedModal> = ({ emai
     if (isVisible) {
       const timer = setTimeout(() => {
         setIsVisible(false); // 表示を終了
-      }, 2500); // 3秒後に自動で非表示
+      }, 6000); // 3秒後に自動で非表示
       return () => clearTimeout(timer);
     }
   }, [isVisible]);
@@ -62,7 +62,7 @@ export const EmailVerifiedModal: FunctionComponent<EmailVerifiedModal> = ({ emai
   return (
     <div className="flex items-center justify-center min-h-screen bg-primary-300">
       {isVisible ? (
-        <div className="fixed top-6 left-1/2 transform -translate-x-1/2  text-text-200 py-2 px-6 rounded shadow-md animate-fade-out flex ">
+        <div className="fixed top-6 left-1/2 transform -translate-x-1/2  text-text-200 py-2 px-6 rounded  animate-fade-out flex ">
           <CircleCheck className="text-secondary-300 mr-2" />
           <p className="text-text-200 font-semibold ">メールを送信しました</p>
         </div>

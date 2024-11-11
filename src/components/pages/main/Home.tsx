@@ -28,6 +28,8 @@ export const Home = () => {
   if (!currentUser) return <Navigate replace to="/signin" />;
   if (isLoading) return <LoadingPage />;
 
+  console.log("Home");
+
   return (
     <HomeTemplate>
       <PostBox />

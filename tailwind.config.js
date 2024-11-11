@@ -35,12 +35,12 @@ export default {
       keyframes: {
         "fade-out": {
           "0%": { opacity: 1 },
-          "40%": { opacity: 1 },
+          "40%": { opacity: 0.8 },
           "100%": { opacity: 0 },
         },
       },
       animation: {
-        "fade-out": "fade-out 4s ease-out forwards",
+        "fade-out": "fade-out 5s ease-out forwards",
       },
     },
   },
