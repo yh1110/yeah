@@ -26,6 +26,7 @@ export const authRepository = {
   },
 
   //サインイン
+  //# returnはtrueかfalse
   async signin(userData: authFormType): Promise<authUser | null> {
     const { email, password } = userData;
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -56,6 +57,7 @@ export const authRepository = {
 
   //otpトークンで認証
   async verifyOtp(email: string, token: string): Promise<authUser | null> {
+    //#TODO 確かオプションで何かつける必要あり
     const { data, error } = await supabase.auth.verifyOtp({
       email,
       token,
@@ -83,6 +85,7 @@ export const authRepository = {
   //サインアウト
   async signout() {
     const { error } = await supabase.auth.signOut();
+    localStorage.removeItem("user");
     if (error != null) throw new Error(error.message);
     return true;
   },

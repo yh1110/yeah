@@ -41,8 +41,8 @@ export const EmailVerifiedModal: FunctionComponent<EmailVerifiedModal> = ({ emai
       dispatch(setIsLoading(true));
       const user = await authRepository.verifyOtp(email, data.pinInput);
       if (user) {
-        console.log(user);
         dispatch(getCurrentUser(user));
+        localStorage.setItem("user", JSON.stringify(user));
         setIsEmailVerified(true);
       }
     } catch (e: unknown) {

@@ -6,13 +6,10 @@ import { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { change } from "@/slice/breadcrumbSlice";
 import { LoadingPage } from "../loading/LoadingPage";
-import { authRepository } from "@/api/auth/auth";
-import { getCurrentUser } from "@/slice/userSlice";
-import { setIsLoading } from "@/slice/loadingSlice";
 
 export const Home = () => {
-  const currentUser = useAppSelector((state) => state.user.user);
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
+  const currentUser = useAppSelector((state) => state.user.user);
   const location = useLocation();
   const dispatch = useAppDispatch();
 
@@ -25,32 +22,11 @@ export const Home = () => {
   );
 
   useEffect(() => {
-    dispatch(setIsLoading(true));
-    const setSession = async () => {
-      const user = await authRepository.getCurrentUser();
-      if (user) {
-        //セッションからユーザー情報を取得できた場合
-        dispatch(getCurrentUser(user));
-      } else {
-        //セッションからユーザー情報を取得できなかった場合
-        //トークン等でサインアップ後のユーザーが認証される状態にする #TODO
-        // const session = authRepository.isEmailConfirmed(localStorage.getItem("user_email") ?? "");
-        // dispatch(getCurrentUser(session));
-      }
-      // localStorage.removeItem("user_email");
-      dispatch(setIsLoading(false));
-    };
-
-    setSession();
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(change(breadcrumbItems));
   }, [location.pathname, dispatch, breadcrumbItems]);
 
-  if (isLoading) return <LoadingPage />;
-
   if (!currentUser) return <Navigate replace to="/signin" />;
+  if (isLoading) return <LoadingPage />;
 
   return (
     <HomeTemplate>

@@ -12,15 +12,20 @@ export const Signin = () => {
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const currentUser = useAppSelector((state) => state.user.user);
 
-  if (isLoading) return <LoadingPage />;
   if (currentUser) return <Navigate replace to="/" />; //トップページへ遷移
+  if (isLoading) return <LoadingPage />;
 
   const handleSubmitForm = async (data: authFormType) => {
     dispatch(setIsLoading(true));
     try {
       if (data) {
         const user = await authRepository.signin(data);
-        if (user) dispatch(getCurrentUser(user));
+
+        if (user) {
+          //セッションに登録
+          localStorage.setItem("user", JSON.stringify(user));
+          dispatch(getCurrentUser(user));
+        }
       } else {
         console.log("データが入力されていない");
       }

@@ -19,9 +19,7 @@ export const Signup = () => {
       if (data) {
         const user = await authRepository.signup(data);
         if (user) {
-          //正常終了時(ユーザー認証はまだ完了していない)
-          // dispatch(getCurrentUser(user));
-          // localStorage.setItem("user_email", user.userData?.email ?? "");
+          //正常終了時(トークン送信)
           setUserEmail(data.email);
           setIsDisplayEmailVerified(true); //認証画面表示フラグ
         } else {
