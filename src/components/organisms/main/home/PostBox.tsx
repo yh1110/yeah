@@ -34,8 +34,6 @@ export const PostBox = () => {
       isActivateHeart: false,
     };
 
-    console.log(postItems);
-
     dispatch(post(postItems)); //グローバルステートに値を追加
   };
 

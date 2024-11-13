@@ -22,13 +22,11 @@ export const Signup = () => {
       console.log("try");
       if (data) {
         const user = await authRepository.signup(data);
-        console.log(user);
         if (user) {
           //正常終了時(トークン送信)
           setUserEmail(data.email);
           setIsDisplayEmailVerified(true); //認証画面表示フラグ
           // localStorage.setItem("user", JSON.stringify(user));
-          console.log(userEmail);
         } else {
           console.log("ユーザー情報無し");
         }

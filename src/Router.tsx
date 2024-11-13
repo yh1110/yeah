@@ -26,7 +26,6 @@ export const Router = () => {
         if (session) {
           //セッションからユーザー情報を取得できた場合
           const user = JSON.parse(session);
-          console.log(user);
 
           dispatch(getCurrentUser(user));
         }
@@ -47,7 +46,6 @@ export const Router = () => {
     const getPosts = async () => {
       const postItems = await postRepository.view();
       dispatch(get(postItems));
-      console.log(postItems);
     };
 
     setSession();

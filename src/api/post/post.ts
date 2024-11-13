@@ -10,8 +10,6 @@ export const postRepository = {
 
     if (error) throw new Error(error.message);
 
-    console.log(data);
-
     return data[0];
   },
 
@@ -22,8 +20,6 @@ export const postRepository = {
       .order("created_at", { ascending: false });
 
     if (error) throw new Error(error.message);
-
-    console.log(data);
 
     return data.map((post) => {
       return {
