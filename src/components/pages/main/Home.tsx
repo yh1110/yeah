@@ -13,6 +13,8 @@ export const Home = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
+  console.log(location);
+
   const breadcrumbItems = useMemo(
     () => [
       { href: "/", name: "ホーム" },
@@ -25,7 +27,7 @@ export const Home = () => {
     dispatch(change(breadcrumbItems));
   }, [location.pathname, dispatch, breadcrumbItems]);
 
-  if (!currentUser) return <Navigate replace to="/signin" />;
+  if (!currentUser && !isLoading) return <Navigate replace to="/signin" />;
   if (isLoading) return <LoadingPage />;
 
   console.log("Home");
