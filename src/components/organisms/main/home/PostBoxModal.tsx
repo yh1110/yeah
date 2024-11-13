@@ -4,6 +4,7 @@ import { post } from "@/slice/postItemsSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { FunctionComponent } from "react";
 import { PostBoxFooter } from "@/components/molecules/PostBoxFooter";
+import { postRepository } from "@/api/post/post";
 
 type PostType = {
   postArea: string;
@@ -14,7 +15,6 @@ type PostBoxModalProps = {
 //widthで要素幅を調整
 //w-fullで子要素の要素幅を合わせる
 //box-borderで子要素の要素幅(paddingも含む)を合わせる
-let num = 0;
 
 export const PostBoxModal: FunctionComponent<PostBoxModalProps> = ({ onClose }) => {
   const {
@@ -25,12 +25,13 @@ export const PostBoxModal: FunctionComponent<PostBoxModalProps> = ({ onClose }) 
 
   const dispatch = useAppDispatch();
   const userName = useAppSelector((state) => state.user.user?.userName);
+  const userId = useAppSelector((state) => state.user.user?.userData?.id);
 
   //投稿ボタンで発火
   const handlePostContent: SubmitHandler<PostType> = async (data: PostType) => {
-    num++;
+    const { id } = await postRepository.create(data.postArea, userId ?? "");
     const postItems = {
-      id: num,
+      id,
       userImageUrl: "https://placeholder.pics/svg/256/ADADAD-ADADAD/ADADAD-ADADAD",
       userName,
       postText: data.postArea,

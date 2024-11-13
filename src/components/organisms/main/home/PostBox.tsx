@@ -3,6 +3,7 @@ import { PostBoxFooter } from "../../../molecules/PostBoxFooter";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { post } from "@/slice/postItemsSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { postRepository } from "@/api/post/post";
 
 type PostType = {
   postArea: string;
@@ -10,7 +11,6 @@ type PostType = {
 //widthで要素幅を調整
 //w-fullで子要素の要素幅を合わせる
 //box-borderで子要素の要素幅(paddingも含む)を合わせる
-let num = 0;
 
 export const PostBox = () => {
   const {
@@ -20,18 +20,22 @@ export const PostBox = () => {
   } = useForm<PostType>();
 
   const userName = useAppSelector((state) => state.user.user?.userName);
+  const userId = useAppSelector((state) => state.user.user?.userData?.id);
   const dispatch = useAppDispatch();
 
   //投稿ボタンで発火
   const handlePostContent: SubmitHandler<PostType> = async (data: PostType) => {
-    num++;
+    const { id } = await postRepository.create(data.postArea, userId ?? "");
     const postItems = {
-      id: num,
+      id,
       userImageUrl: "https://placeholder.pics/svg/256/ADADAD-ADADAD/ADADAD-ADADAD",
       userName,
       postText: data.postArea,
       isActivateHeart: false,
     };
+
+    console.log(postItems);
+
     dispatch(post(postItems)); //グローバルステートに値を追加
   };
 

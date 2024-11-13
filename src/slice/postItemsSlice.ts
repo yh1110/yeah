@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export type post = {
   id: number;
+  userId: string;
   userImageUrl: string;
   userName: string;
   postText: string;
@@ -16,6 +17,7 @@ const initialState: postItem = {
   post: [
     {
       id: 0,
+      userId: "",
       userImageUrl: "https://placeholder.pics/svg/256/ADADAD-ADADAD/ADADAD-ADADAD",
       userName: "neon",
       postText: "",

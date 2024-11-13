@@ -22,6 +22,11 @@ export const Home = () => {
   );
 
   useEffect(() => {
+    // const post = postRepository.view();
+    // console.log(post);
+  }, []);
+
+  useEffect(() => {
     dispatch(change(breadcrumbItems));
   }, [location.pathname, dispatch, breadcrumbItems]);
 

@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import { setIsLoading } from "./slice/loadingSlice";
 // import { authRepository } from "./api/auth/auth";
 import { getCurrentUser } from "./slice/userSlice";
+import { postRepository } from "./api/post/post";
+import { get } from "./slice/postItemsSlice";
 
 export const Router = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +18,7 @@ export const Router = () => {
   //ユーザー情報取得
   useEffect(() => {
     dispatch(setIsLoading(true));
+
     const setSession = async () => {
       try {
         //セッションからユーザー情報を取得
@@ -40,7 +43,15 @@ export const Router = () => {
         dispatch(setIsLoading(false));
       }
     };
+
+    const getPosts = async () => {
+      const postItems = await postRepository.view();
+      dispatch(get(postItems));
+      console.log(postItems);
+    };
+
     setSession();
+    getPosts();
   }, [dispatch]);
 
   console.log("Router");

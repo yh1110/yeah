@@ -12,7 +12,7 @@ export const Signin = () => {
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const currentUser = useAppSelector((state) => state.user.user);
 
-  if (currentUser) return <Navigate replace to="/" />; //トップページへ遷移
+  if (currentUser) return <Navigate replace to="/" />; //トップページへ遷移 #TODO
   if (isLoading) return <LoadingPage />;
 
   const handleSubmitForm = async (data: authFormType) => {

@@ -21,6 +21,8 @@ export const Profile = () => {
     dispatch(change(breadcrumbItems));
   }, [location.pathname, dispatch, breadcrumbItems]);
 
+  console.log("Profile");
+
   return (
     <HomeTemplate>
       <UserProfile />
