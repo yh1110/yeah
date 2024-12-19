@@ -17,9 +17,15 @@ export const authRepository = {
       password,
       options: { data: { name: username } },
     });
+
     if (error) {
-      console.error("signupError:", error.message);
-      throw new Error(error.message);
+      if (error.status === 422) {
+        throw new Error("パスワードは6文字以上で入力してください");
+      } else if (error.status === 429) {
+        throw new Error("しばらく間隔をあけて再度お試しください");
+      } else {
+        throw new Error("不明なエラー");
+      }
     }
 
     return { userData: data.user, userName: data.user?.user_metadata?.name };
@@ -35,25 +41,15 @@ export const authRepository = {
     });
 
     if (error) {
-      console.error("signinError:", error.message);
-      throw new Error(error.message);
+      if (error.status === 400) {
+        throw new Error("ユーザーが存在しない、またはパスワードが異なります");
+      } else {
+        throw new Error("不明なエラー");
+      }
     }
 
     return { userData: data.user, userName: data.user.user_metadata?.name };
   },
-
-  //メールが認証されたかの判別 #TODO
-  // async isEmailConfirmed(email: string) {
-  //   const { data, error } = await supabase.auth.signInWithOtp({
-  //     email,
-  //     options: {
-  //       emailRedirectTo: "http://localhost:5173/",
-  //     },
-  //   });
-
-  //   if (error) throw new Error(error.message);
-  //   return data;
-  // },
 
   //otpトークンで認証
   async verifyOtp(email: string, token: string): Promise<authUser | null> {
@@ -64,7 +60,13 @@ export const authRepository = {
       type: "email",
     });
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      if (error.status === 403) {
+        throw new Error("認証コードが一致しません");
+      } else {
+        throw new Error("不明なエラー");
+      }
+    }
 
     return { userData: data.user, userName: data.user?.user_metadata.name };
   },

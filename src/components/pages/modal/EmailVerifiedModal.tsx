@@ -5,9 +5,9 @@ import { getCurrentUser } from "@/slice/userSlice";
 import { Button, FormControl, PinInput } from "@yamada-ui/react";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { LoadingPage } from "../loading/LoadingPage";
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, CircleHelp, CircleX } from "lucide-react";
 
 type EmailVerifiedModal = {
   email: string;
@@ -15,6 +15,8 @@ type EmailVerifiedModal = {
 type Data = { pinInput: string };
 
 export const EmailVerifiedModal: FunctionComponent<EmailVerifiedModal> = ({ email }) => {
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [isVisible, setIsVisible] = useState(true);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const dispatch = useAppDispatch();
@@ -24,7 +26,7 @@ export const EmailVerifiedModal: FunctionComponent<EmailVerifiedModal> = ({ emai
     if (isVisible) {
       const timer = setTimeout(() => {
         setIsVisible(false); // 表示を終了
-      }, 6000); // 3秒後に自動で非表示
+      }, 6000); // 6秒後に自動で非表示
       return () => clearTimeout(timer);
     }
   }, [isVisible]);
@@ -47,9 +49,9 @@ export const EmailVerifiedModal: FunctionComponent<EmailVerifiedModal> = ({ emai
       }
     } catch (e: unknown) {
       if (e instanceof Error) {
-        console.error(e.name, e.message);
-      } else {
-        console.error("不明なエラー");
+        //認証に失敗
+        setIsError(true);
+        setErrorMsg(e.message);
       }
     } finally {
       dispatch(setIsLoading(false));
@@ -65,6 +67,12 @@ export const EmailVerifiedModal: FunctionComponent<EmailVerifiedModal> = ({ emai
         <div className="fixed top-6 left-1/2 transform -translate-x-1/2  text-text-200 py-2 px-6 rounded  animate-fade-out flex ">
           <CircleCheck className="text-secondary-300 mr-2" />
           <p className="text-text-200 font-semibold ">メールを送信しました</p>
+        </div>
+      ) : null}
+      {isError ? (
+        <div className="fixed top-6 left-1/2 transform -translate-x-1/2  text-text-200 py-2 px-6 rounded  animate-fade-out flex ">
+          <CircleX className="text-red-800 mr-2" />
+          <p className="text-text-200 font-semibold ">{errorMsg}</p>
         </div>
       ) : null}
       <div className="w-full max-w-sm mx-auto space-y-6">
@@ -105,6 +113,27 @@ export const EmailVerifiedModal: FunctionComponent<EmailVerifiedModal> = ({ emai
             </div>
           </FormControl>
         </form>
+
+        <div className="space-y-2 pt-5">
+          <div className=" w-3/4 mx-auto">
+            <div className="flex items-center mb-1">
+              <CircleHelp className=" text-sm text-zinc-500 size-4" />
+              <p className=" text-sm text-zinc-500 ml-1">認証コードが送信されない場合</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground text-zinc-500 ">
+                すでに認証済みの可能性があります。
+                <Link to={"/signin"} className="cursor-pointer border-b border-zinc-500">
+                  こちら
+                </Link>
+                をクリックしてサインインしてください。
+              </p>
+              {/* <p className="text-xs text-muted-foreground text-text-300 ">
+                すでに認証済みの可能性があります。こちらをクリックしてサインインしてください。
+              </p> */}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

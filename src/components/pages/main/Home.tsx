@@ -13,8 +13,6 @@ export const Home = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  console.log(location);
-
   const breadcrumbItems = useMemo(
     () => [
       { href: "/", name: "ホーム" },

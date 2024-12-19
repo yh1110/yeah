@@ -6,8 +6,12 @@ import { authRepository } from "@/api/auth/auth";
 import { setIsLoading } from "@/slice/loadingSlice";
 import { getCurrentUser } from "@/slice/userSlice";
 import { authFormType } from "@/components/molecules/AuthForm";
+import { CircleX } from "lucide-react";
+import { useState } from "react";
 
 export const Signin = () => {
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const currentUser = useAppSelector((state) => state.user.user);
@@ -27,26 +31,28 @@ export const Signin = () => {
           dispatch(getCurrentUser(user));
         }
       } else {
-        console.log("データが入力されていない");
+        // zodで管理
       }
-    } catch (error: unknown) {
+    } catch (e: unknown) {
       // Errorインスタンスか確認
-      if (error instanceof Error) {
+      if (e instanceof Error) {
         //ログインに失敗
-        console.error(error.name, error.message);
-        console.log("サインイン、サインアップエラー");
-      } else {
-        console.error("An unknown error occurred"); // 不明なエラーの場合
-        console.log("不明なエラー");
+        setIsError(true);
+        setErrorMsg(e.message);
       }
     } finally {
       dispatch(setIsLoading(false));
     }
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+      {isError ? (
+        <div className="fixed top-24 left-1/2 transform -translate-x-1/2  text-text-300 py-2 px-6 rounded  animate-fade-out flex justify-center items-center w-full ">
+          <CircleX className="text-red-800 mr-2" />
+          <p className="text-text-300 font-semibold text-sm">{errorMsg}</p>
+        </div>
+      ) : null}
       <AuthFormArea isSignin={true} handleSubmitForm={handleSubmitForm} />
     </div>
   );
